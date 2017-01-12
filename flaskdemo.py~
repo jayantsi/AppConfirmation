@@ -1,0 +1,22 @@
+
+from flask import Flask
+from flask import Flask, jsonify, abort, request
+app = Flask(__name__)
+
+@app.route('/alpha')
+def alphabg():
+    return "This is the alpha version"
+
+
+@app.route('/appointments', methods = ['GET'])
+def alpha():
+        if not request.json or not 'name' in request.json:
+            abort(400)
+        dev = COMPANY(request.json.name, request.json.get('ID', ''), request.json.get('name',''))
+        db.session.add(dev)
+        db.session.commit()
+        return jsonify( { 'COMPANY': dev } ), 201
+
+
+if __name__=='__main__':
+    app.run(debug=True)

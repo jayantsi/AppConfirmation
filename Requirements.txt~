@@ -1,0 +1,27 @@
+Appointment-Confirmations Page:
+
+Used Tools are: 
+1. Python - as scripting language during the process
+2. SQL Lite - for storing data in the database
+3. JQuery - Inorder to send query strings to retrieve data
+4. HTML - For developing the Front-end of the web-application
+5. Bootstrap - For proper format of the web page. 
+6. VMware (Ubuntu-Linux) - environment to develop and debug the web-page.
+7. Flask - was used as a framework 
+8. REST - Web service was used
+
+
+OUTPUT: Finished the Project successfully in 2 days. I have used 3rd day for improvising and documentation. 
+
+
+Versions:
+
+Python 2.7.3
+Sql Lite 3
+Javascript - JQuery
+
+
+
+
+
+

@@ -1,0 +1,184 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+ <script> 
+
+function display()
+{
+
+    document.getElementById("date").style.display='block';
+    document.getElementById("description").style.display='block';
+    //document.getElementById("submit").style.display='block';
+     //$('#bt1').value='Add';
+    //$("#bt1").attr('value','Add');
+    //document.getElementById("bt1").value="Add";
+         /*var change = document.getElementById("#bt1");
+                if (change.value == "New")
+                {
+                    change.value = "Add";
+                }
+                else {
+                    change.value = "New";
+                } */
+} 
+
+
+function showAppointments() {
+            var selText = $('#search').val();
+
+                $.ajax({
+                    type: 'GET',
+                    url: '/appointments',
+                    jsonpCallback: 'jsonCallback',
+                    jsonp: false,
+                    data: {search:selText},
+                    success: function (response) {
+			//alert('test alert');
+                        //alert( JSON.stringify(response));
+			//alert(response.length);
+                        var trHTML = "<table class='table table-striped table-bordered table-hover' id='records_table2'><tr><th>Appointment_Date</th><th>Description</th></tr>";
+                    for(var i =0;i <= response.length-1;i++)
+                      {
+                         var o= response[i];
+
+                                trHTML += '<tr><td>' + o.Appointment_date +
+                                    '</td><td>' + o.Description +
+                                    '</td></tr>';
+                           }
+                        trHTML+="</table>" 
+                        $('#records_table').empty().append(trHTML);
+			
+                    },
+                    error: function (e) {
+			alert(e);
+                        $("#txtHint").html(e.responseText);
+                    }
+                }); 
+            
+        }
+
+
+function saveAppointments() {
+	    debugger;
+            var sdate = $('#date').val();
+	    var sdescription = $('#description').val(); 
+	    var jsonObj = {"Appointment_date":sdate, "Description":sdescription};
+                $.ajax({
+                    type: 'POST',
+                    url: '/appointments',
+                    jsonpCallback: 'jsonCallback',
+		    contentType: "application/json",
+                    dataType: 'json',
+                    jsonp: false,
+                    data: JSON.stringify(jsonObj),
+
+                    success: function (response) {
+			//alert('test alert');
+                        //alert( JSON.stringify(response));
+			//alert(response.length);
+                        var trHTML = "<table class='table table-striped table-bordered table-hover' id='records_table2'><tr><th>Appointment_Date</th><th>Description</th></tr>";
+                    for(var i =0;i <= response.length-1;i++)
+                      {
+                         var o= response[i];
+
+                                trHTML += '<tr><td>' + o.Appointment_date +
+                                    '</td><td>' + o.Description +
+                                    '</td></tr>';
+                           }
+                        trHTML+="</table>" 
+                        $('#records_table').empty().append(trHTML);
+			
+                    },
+                    error: function (e) {
+			alert(e);
+                        $("#txtHint").html(e.responseText);
+                    }
+                }); 
+            
+        }
+
+$(document).ready(function () {
+	showAppointments();
+        $("#search2").click(showAppointments);
+	$( "#date" ).datepicker({minDate: 0});
+	//$("#bt1").click(saveAppointments);
+        $("#bt1").click(function(){ 
+	   if($(this).val()=="New")
+		{
+		
+			$(this).val('Add');
+			$("#date").show(); 
+			$("#description").show();
+			$("#d1").show();
+			$("#d2").show();
+		}
+	    else
+	   	{	
+		
+		saveAppointments();
+		$(this).val('New');
+		$("#date").val('').hide();
+		$("#description").val('').hide();
+		$("#d1").val('').hide();
+		$("#d2").val('').hide();
+		
+		}
+         });
+	
+    });
+
+
+</script>
+
+
+
+  </head>  
+<body>
+
+
+<h2> <p class="text-center"> <u> Appointments-Confirmation Page </u> </p> </h2>
+
+   
+   <div class="container">
+  <!-- <button type="button" id="bt1" onclick="display()" class="btn btn-primary" value="button"> New </button> -->
+	<input id="bt1" type="button"  class="btn btn-primary" value="New">
+   	<br>
+   <form id="target" name="myForm" >
+	<br>
+    <div class="form-group col-sm-4">
+      <span class="label label-default" id="d1" style="display:none">Date:</span>
+      <input type="date" class="form-control" name="Date" id="date" style="display:none" > 
+       <br>
+	<span class="label label-default" id="d2" style="display:none">Description:</span>
+      <input type="text" class="form-control" name="Description" id="description" style="display:none"> 
+    </div>
+      <!-- <button type="submit" id="submit" class="btn btn-primary" style="display:none"> Submit</button> -->
+   </form>
+   <br>
+   <br>
+<br>
+ <br>
+<br>
+   <form action="/" method="post">
+    <div class="form-group col-sm-4">		
+      <input type="text" class="form-control" name="search" id="search" size="3">
+    </div> 
+<button type="button" id="search2" class="btn btn-primary"> Search </button> 
+   </form>
+
+	<div id="div1"><h3>List of Confirmations: </h3></div>
+	<table id="records_table"></table>
+
+ 
+
+     
+</div>
+
+
+</body>
+</html>

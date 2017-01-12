@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Confirmation Page</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    	
+
+  <script> 
+
+$(document).ready(function(){
+    $("#b2").click(getAppointments
+	
+	//$("#div1").load("http://localhost:5000/appointments",0,0);
+    );
+});
+
+function getAppointments()
+{
+	//alert("Successfully loaded the content!");
+	//$("#b").load(https://jayantsi.github.io/,0,0);
+       // $("#divTestArea1").load("content.html");
+	   $("#div1").load();
+	   
+} 
+
+
+
+
+</script>
+
+  
+  
+</head>
+<body>
+   
+   <div class="container" id="b">
+  <button type="button" id="bt1" class="btn btn-primary">New </button> 
+   <form action="/" method="post">		
+      <input type="text" class="form-control" name="name" id="name" size="3">
+      <input type="text" class="form-control" name="addess" id="address" size="3">
+	  <input type="button" id="b2" class="btn btn-primary" value="Search">  
+   </form>
+	<div id="div1"><h2>Let jQuery AJAX Change This Text</h2></div>
+
+      
+</div>
+
+
+
+
+</body>
+</html>
+
+
+
+
